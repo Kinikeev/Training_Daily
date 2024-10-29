@@ -4,6 +4,7 @@ import model.Training;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -64,7 +65,15 @@ public class DailyAppl {
             System.out.println("Enter training type: (walking, running, jumping)");
             String type = scanner.nextLine();
             System.out.println("Enter date (yyyy-mm-dd):");
-            LocalDate date = LocalDate.parse(scanner.nextLine());
+
+            // заменил разделители (пробел, запятая...)
+            String inputDate = scanner.nextLine();
+            // Замена любых разделителей (точка, запятая, тире, подчеркивание) на дефис
+            inputDate = inputDate.replaceAll("[ .,_-]+", "-");
+            LocalDate date = LocalDate.parse(inputDate);
+
+            //LocalDate date = LocalDate.parse(scanner.nextLine());
+
             System.out.println("Enter distance (km):");
             double distance = scanner.nextDouble();
             System.out.println("Enter duration (hours):");
@@ -76,6 +85,11 @@ public class DailyAppl {
         } catch (InputMismatchException e) {
             System.out.println("Invalid number format. Please try again.");
             scanner.nextLine(); // clear the invalid input
+
+            // добавил
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter the date in format yyyy-mm-dd.");
+
         } catch (Exception e) {
             System.out.println("An error occurred while adding training. Please try again.");
         }
@@ -83,16 +97,25 @@ public class DailyAppl {
 
     private void updateTraining() {
         try {
-            System.out.println("Enter training ID to update:");
+
+            // добавил (walking, running, jumping)
+            System.out.println("Enter training ID to update: ");
             int id = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             Training existingTraining = trainingService.getTrainingById(id);
             if (existingTraining != null) {
-                System.out.println("Enter new training type:");
+                System.out.println("Enter new training type: (walking, running, jumping)");
                 String type = scanner.nextLine();
+
+                // заменил разделители (пробел, запятая...)
                 System.out.println("Enter new date (yyyy-mm-dd):");
-                LocalDate date = LocalDate.parse(scanner.nextLine());
+                String inputDate = scanner.nextLine();
+                // Замена любых разделителей (точка, запятая, тире, подчеркивание) на дефис
+                inputDate = inputDate.replaceAll("[ ._,-]+", "-");
+                LocalDate date = LocalDate.parse(inputDate);
+              //  LocalDate date = LocalDate.parse(scanner.nextLine());
+
                 System.out.println("Enter new distance (km):");
                 double distance = scanner.nextDouble();
                 System.out.println("Enter new duration (hours):");
@@ -107,6 +130,12 @@ public class DailyAppl {
         } catch (InputMismatchException e) {
             System.out.println("Invalid number format. Please try again.");
             scanner.nextLine(); // clear the invalid input
+
+            // добавил
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format. Please enter the date in format yyyy-mm-dd.");
+
+
         } catch (Exception e) {
             System.out.println("An error occurred while updating training. Please try again.");
         }
