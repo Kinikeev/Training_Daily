@@ -7,22 +7,14 @@ import java.util.List;
 public interface Daily {
 
 
+    void addTraining(Training training);
 
-    public interface TrainingService {
+    void updateTraining(int id, Training updatedTraining);
 
-        // Метод для добавления новой тренировки
-        void addTraining(Training training);
+    void deleteTraining(int id);
 
-        // Метод для обновления существующей тренировки по ID
-        void updateTraining(int id, Training updatedTraining);
+    List<Training> getAllTrainings();
 
-        // Метод для удаления тренировки по ID
-        void deleteTraining(int id);
+    Training getTrainingById(int id);
 
-        // Метод для получения списка всех тренировок
-        List<Training> getAllTrainings();
-
-        // Метод для получения тренировки по ID
-        Training getTrainingById(int id);
-    }
 }
