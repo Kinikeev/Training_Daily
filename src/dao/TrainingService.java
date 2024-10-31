@@ -32,6 +32,6 @@ public class TrainingService {
         return trainingDiary.getTrainingById(id);
     }
 
-    // Дополнительные методы для подсчета статистики или сортировки
+    public double getTotalDistance() { return trainingDiary.getTotalDistance(); }
 
 }

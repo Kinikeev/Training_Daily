@@ -17,4 +17,7 @@ public interface Daily {
 
     Training getTrainingById(int id);
 
+    // дополнитеный метод на подсчет киллометров
+    double getTotalDistance();
 }
+

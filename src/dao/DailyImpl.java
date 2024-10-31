@@ -41,4 +41,9 @@ public class DailyImpl implements Daily{
                 .findFirst()
                 .orElse(null);
     }
+
+    // Новый метод для подсчета общего количества километров
+    public double getTotalDistance() {
+        return trainings.stream().mapToDouble(Training::getDistance).sum();
+    }
 }

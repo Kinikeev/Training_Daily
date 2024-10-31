@@ -18,6 +18,7 @@ public class DailyAppl {
 
         new DailyAppl().start();
 
+
     } // end of main
 
     public void start() {
@@ -68,7 +69,9 @@ public class DailyAppl {
 
             // заменил разделители (пробел, запятая...)
             String inputDate = scanner.nextLine();
+
             // Замена любых разделителей (точка, запятая, тире, подчеркивание) на дефис
+
             inputDate = inputDate.replaceAll("[ .,_-]+", "-");
             LocalDate date = LocalDate.parse(inputDate);
 
@@ -98,10 +101,10 @@ public class DailyAppl {
     private void updateTraining() {
         try {
 
-            // добавил (walking, running, jumping)
+
             System.out.println("Enter training ID to update: ");
             int id = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             Training existingTraining = trainingService.getTrainingById(id);
             if (existingTraining != null) {
@@ -166,6 +169,10 @@ public class DailyAppl {
         for (Training training : trainingService.getAllTrainings()) {
             System.out.println(training);
         }
+
+        // Подсчёт и вывод общей дистанции
+        double totalDistance = trainingService.getTotalDistance();
+        System.out.println("Total distance of all trainings: " + totalDistance + " km");
     }
 
     private void saveToFile() {
@@ -180,6 +187,10 @@ public class DailyAppl {
             System.out.println("An error occurred while saving data to file.");
         }
     }
+
+    // private void viewTotalDistance() {
+      //  System.out.println("Total distance of all trainings: " + trainingService.getTotalDistance() + " km");
+    //}
 
     private void loadFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {

@@ -65,5 +65,15 @@ class DailyImplTest {
         assertNull(notFound);
     }
 
+    @Test
+    void getTotalDistance() {
+        Training training1 = new Training(1, "running", LocalDate.now(), 5.0, 0.5);
+        Training training2 = new Training(2, "walking", LocalDate.now(), 3.0, 1.0);
+
+        trainingDiary.addTraining(training1);
+        trainingDiary.addTraining(training2);
+
+        assertEquals(8.0, trainingDiary.getTotalDistance());
+    }
 
 }
